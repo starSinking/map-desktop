@@ -1,0 +1,88 @@
+{
+  "name": "map-desktop",
+  "private": true,
+  "version": "0.0.0",
+  "main": "src/electron-main/main.js",
+  "author": "wpj",
+  "description": "ceshi",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "electron": "nodemon --exec electron . --watch ./ --ext .js,.html,.scss,.vue,.ts,.css",
+    "serve": "concurrently -k \"yarn run dev\" \"yarn run electron\""
+  },
+  "dependencies": {
+    "@amap/amap-jsapi-loader": "^1.0.1",
+    "concurrently": "^8.2.0",
+    "cross-env": "^7.0.3",
+    "electron": "^25.3.2",
+    "electron-builder": "^24.6.3",
+    "electron-is-dev": "^2.0.0",
+    "electron-store": "^8.1.0",
+    "electron-window-state": "^5.0.3",
+    "element-plus": "^2.3.8",
+    "vue": "^3.3.4",
+    "vue-router": "4",
+    "wait-on": "^7.0.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.2.3",
+    "unplugin-auto-import": "^0.16.6",
+    "unplugin-vue-components": "^0.25.1",
+    "vite": "^4.4.5"
+  },
+  "build": {
+    "appId": "map-car",
+    "productName": "map-car",
+    "copyright": "Copyright © 2022 car",
+    "asar": true,
+    "directories": {
+      "output": "build"
+    },
+    "files": [
+      "./dist",
+      "./package.json",
+      "./src/electron-main"
+    ],
+    "nsis": {
+      "oneClick": false,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    },
+    "dmg": {
+      "contents": [
+        {
+          "x": 410,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        },
+        {
+          "x": 130,
+          "y": 150,
+          "type": "file"
+        }
+      ]
+    },
+    "mac": {
+      "icon": "build/001.png"
+    },
+    "win": {
+      "icon": "build/001.png",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "ia32"
+          ]
+        }
+      ]
+    },
+    "linux": {
+      "icon": "build/001.png"
+    }
+  }
+}
